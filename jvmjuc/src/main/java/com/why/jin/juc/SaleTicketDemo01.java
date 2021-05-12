@@ -41,7 +41,13 @@ public class SaleTicketDemo01 {
 
     public static void main(String[] args) {
 
-        final Ticket ticket = new Ticket();
+        Ticket ticket = new Ticket();
+
+        new Thread(() ->{ for (int i=1;i<=40;i++) ticket.sale();},"A").start();
+        new Thread(() ->{ for (int i=1;i<=40;i++) ticket.sale();},"B").start();
+        new Thread(() ->{ for (int i=1;i<=40;i++) ticket.sale();},"C").start();
+
+
 
         /*new Thread(new Runnable() {
             @Override
