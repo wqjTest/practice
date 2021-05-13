@@ -45,6 +45,8 @@ class Phone{
  * 对于同步方法块，锁是synchronized括号里配置的对象
  *
  * 对于静态同步方法，锁是当前类的class对象。
+ *
+ *
  */
 public class Lock8Demo05 {
     public static void main(String[] args) throws InterruptedException{
