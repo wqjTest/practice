@@ -30,7 +30,21 @@ package com.why.jin.jvm;
      方法区 f= new 元空间
 
     6 stack
-      栈管运行，堆管存储
+      6.1 栈管运行，堆管存储
+      6.2 栈保存哪些东东？
+       8种基本类型的变量+对象的引用变量+实例方法都是在函数的栈内存中分配
+      6.3 Exception in thread "main" java.lang.stackOverflowError
+    7 heap
+      Eden满了，开启
+        GC = YGC = 轻GC
+        Eden基本全部清空
+
+       S0 = from
+       S1 = to
+
+       交换 ？？？？不用搞懂，2次明白
+       from区和to区，他们的位置和名分，不是固定，每次GC后会交换
+       GC之后有交换，谁空谁是to
 
  */
 public class JVMNote {
@@ -41,6 +55,12 @@ public class JVMNote {
 
     public static void air(){
 
+    }
+
+    public int add(int x,int y){
+        int result = -1;
+        result = x + y;
+        return result;
     }
 
     public static void main(String[] args) {
