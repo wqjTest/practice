@@ -1,27 +1,22 @@
-package com.why.jin.queue;
+package com.why.jin.dataStructure.queue;
 
 import java.util.Scanner;
 
 /**
  * @author Jin
- * dateTime 2021-04-29-13:28
- * description: 使用数组模拟环形队列
- * 1.  front 变量的含义做一个调整： front 就指向队列的第一个元素, 也就是说 arr[front] 就是队列的第一个元素
- * front 的初始值 = 0
- * 2.  rear 变量的含义做一个调整：rear 指向队列的最后一个元素的后一个位置. 因为希望空出一个空间做为约定.
- * rear 的初始值 = 0
- * 3. 当队列满时，条件是  (rear  + 1) % maxSize == front 【满】
- * 4. 对队列为空的条件， rear == front 空
- * 5. 当我们这样分析， 队列中有效的数据的个数   (rear + maxSize - front) % maxSize   // rear = 1 front = 0
- * 6. 我们就可以在原来的队列上修改得到，一个环形队列
+ * dateTime 2021-04-28-13:17
+ * description:数组模拟队列
+ *
+ * 队列本身是有序列表，若使用数组的结构来存储队列的数据，则队列数组的声明如下图, 其中 maxSize 是该队列的最大容量。
+ *
+ * 因为队列的输出、输入是分别从前后端来处理，因此需要两个变量 front及 rear分别记录队列前后端的下标，front 会随着数据输出而改变，而 rear则是随着数据输入而改变，如图所示:
  */
-public class CircleArrayQueueDemo {
+public class ArrayQueueDemo {
 
     public static void main(String[] args) {
-        //测试一把
-        System.out.println("测试数组模拟环形队列的案例~");
-        //创建一个环形队列
-        CircleArray queue = new CircleArray(4);//说明设置4，其队列的有效数据最大是3
+         //创建一把
+         //创建一个队列
+        ArrayQueue arrayQueue = new ArrayQueue(3);
         char key = ' ';//接收用户输入
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
@@ -36,24 +31,24 @@ public class CircleArrayQueueDemo {
             key = scanner.next().charAt(0);//接收一个字符
             switch (key){
                 case 's':
-                    queue.showQueue();
+                    arrayQueue.showQueue();
                     break;
                 case 'a':
                     System.out.println("输入一个数");
                     int value = scanner.nextInt();
-                    queue.addQueue(value);
+                    arrayQueue.addQueue(value);
                     break;
                 case 'g':
                     try{
-                        int res = queue.getQueue();
-                        System.out.printf("取出的数据是%d\n",res);
+                       int res = arrayQueue.getQueue();
+                       System.out.printf("取出的数据是%d\n",res);
                     }catch (Exception e){
                         System.out.println(e.getMessage());
                     }
                     break;
                 case 'h':
                     try {
-                        int res = queue.headQueue();
+                        int res = arrayQueue.headQueue();
                         System.out.printf("队列头的数据是%d\n",res);
                     }catch (Exception e){
                         System.out.println(e.getMessage());
@@ -69,26 +64,25 @@ public class CircleArrayQueueDemo {
         }
         System.out.println("程序退出");
     }
+
 }
 
-class CircleArray{
+class ArrayQueue{
     private int maxSize;//表示数组的最大容量
-    //front 变量的含义做一个调整： front 就指向队列的第一个元素, 也就是说 arr[front] 就是队列的第一个元素
-    //front 的初始值 = 0
-    private int front;
-    //rear 变量的含义做一个调整：rear 指向队列的最后一个元素的后一个位置. 因为希望空出一个空间做为约定.
-    //rear 的初始值 = 0
-    private int rear;
+    private int front;//队列头
+    private int rear;//队列尾
     private int[] arr;//该数组用于存放数据，模拟队列
 
     //创建队列的构造器
-    public CircleArray(int arrMaxSize){
+    public ArrayQueue(int arrMaxSize){
         maxSize = arrMaxSize;
         arr = new int[maxSize];
+        front = -1;//指向队列头部，分析出front是指向队列头的前一个位置
+        rear = -1;//指向队列尾，指向队列尾的数据（即就是队列最后一个数据）
     }
     //判断队列是否满
     public boolean isFull(){
-        return(rear + 1)%maxSize == front;
+        return rear == maxSize -1;
     }
     //判断队列是否为空
     public boolean isEmpty(){
@@ -101,10 +95,8 @@ class CircleArray{
             System.out.println("队列满,不能加入数据~");
             return;
         }
-        //直接将数据加入
+        rear++;//让rear后移
         arr[rear] = n;
-        //将rear后移，这里必须考虑取模
-        rear = (rear + 1)%maxSize;
     }
     //获取队列数据，出队列
     public int getQueue(){
@@ -112,13 +104,8 @@ class CircleArray{
         if (isEmpty()){
             throw new RuntimeException("队列空，不能取数据");
         }
-        //这里需要分析出front是指向队列的第一个元素
-        //1.先把front对应的值保留到一个临时变量
-        //2.将front后移，考虑取模
-        //3.将临时保存的变量返回
-        int value = arr[front];
-        front = (front + 1)%maxSize;
-        return value;
+        front++;//front后移
+        return arr[front];
     }
     //显示队列的所有数据
     public void showQueue(){
@@ -127,27 +114,17 @@ class CircleArray{
             System.out.println("队列空的，没有数据~~");
             return;
         }
-        //思路：从front开始遍历，遍历多少个元素
-        //动脑筋
-        for (int i=front;i<front + size();i++){
-            System.out.printf("arr[%d]=%d\n",i % maxSize,arr[i % maxSize]);
+        for (int i=0;i<arr.length;i++){
+            System.out.printf("arr[%d]=%d\n",i,arr[i]);
         }
     }
-    //求出当前队列有效数据的个数
-    public int size(){
-        //rear = 2
-        //front = 1
-        //maxSize = 3
-        return (rear + maxSize - front)%maxSize;
-    }
-
     //显示队列的头数据，注意不是取出数据
     public int headQueue(){
         //判断
         if (isEmpty()){
             throw new RuntimeException("队列空的，没有数据~~~");
         }
-        return arr[front];
+        return arr[front+1];
     }
 
 }

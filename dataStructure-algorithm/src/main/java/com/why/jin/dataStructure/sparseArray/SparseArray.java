@@ -1,4 +1,4 @@
-package com.why.jin.sparseArray;
+package com.why.jin.dataStructure.sparseArray;
 
 import java.io.*;
 

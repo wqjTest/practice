@@ -1,4 +1,4 @@
-package com.why.jin.linkedList;
+package com.why.jin.dataStructure.linkedList;
 
 /**
  * @author Jin
