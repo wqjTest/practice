@@ -31,6 +31,7 @@ public class StringPool58Demo {
         System.out.println(str2);
         System.out.println(str2.intern());
         System.out.println(str2 == str2.intern());
+        //
     }
 
 }
