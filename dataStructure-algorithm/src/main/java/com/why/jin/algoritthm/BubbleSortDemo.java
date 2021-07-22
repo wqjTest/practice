@@ -2,6 +2,9 @@ package com.why.jin.algoritthm;
 
 import java.util.Arrays;
 
+/**
+ * 冒泡排序
+ */
 public class BubbleSortDemo {
 
     
