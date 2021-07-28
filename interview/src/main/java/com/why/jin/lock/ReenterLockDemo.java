@@ -1,5 +1,8 @@
-package com.why.jin;
+package com.why.jin.lock;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -30,8 +33,7 @@ class Phone implements Runnable{
     public void set(){
         lock.lock();
         try{
-            System.out.println(Thread.currentThread().getName() + "\t invoked get()");
-            set();
+            System.out.println(Thread.currentThread().getName() + "\t invoked set()");
         }finally {
             lock.unlock();
         }
@@ -64,6 +66,21 @@ public class ReenterLockDemo {
                 e.printStackTrace();
             }
         },"t2").start();
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        Thread t3 = new Thread(phone);
+        Thread t4 = new Thread(phone);
+       Map<String,String> map = new ConcurrentHashMap<>();
+        t3.start();
+        t4.start();
     }
 
 }
