@@ -1,10 +1,12 @@
 package com.why.jin.aqs;
 
+import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * description:
+ * description:抽象的队列式的同步器
  *
  * ReentrantLock的加锁过程，可以分为三个阶段：
  * 1、尝试加锁
@@ -61,5 +63,4 @@ public class AQSDemo {
         },"C").start();
 
     }
-
 }
