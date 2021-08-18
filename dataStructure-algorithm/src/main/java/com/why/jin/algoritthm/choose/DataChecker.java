@@ -1,6 +1,7 @@
 package com.why.jin.algoritthm.choose;
 
 import com.why.jin.algoritthm.bubbling.BubbleSort;
+import com.why.jin.algoritthm.hill.ShellSort;
 import com.why.jin.algoritthm.insertion.InsertionSort;
 
 import java.util.Arrays;
@@ -32,6 +33,7 @@ public class DataChecker {
 //        SelectionSort.sort(arr2);
 //        BubbleSort.sort(arr2);
 //        InsertionSort.sort(arr2);
+        ShellSort.sort(arr2);
 
         boolean same = true;
         for (int i=0;i<arr2.length;i++){
