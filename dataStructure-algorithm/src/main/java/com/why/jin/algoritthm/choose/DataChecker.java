@@ -3,6 +3,8 @@ package com.why.jin.algoritthm.choose;
 import com.why.jin.algoritthm.bubbling.BubbleSort;
 import com.why.jin.algoritthm.hill.ShellSort;
 import com.why.jin.algoritthm.insertion.InsertionSort;
+import com.why.jin.algoritthm.merge.MergeSort;
+import com.why.jin.algoritthm.merge.MergeSort2;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -33,7 +35,8 @@ public class DataChecker {
 //        SelectionSort.sort(arr2);
 //        BubbleSort.sort(arr2);
 //        InsertionSort.sort(arr2);
-        ShellSort.sort(arr2);
+//        ShellSort.sort(arr2);
+        MergeSort2.sort(arr2,0,arr2.length-1);
 
         boolean same = true;
         for (int i=0;i<arr2.length;i++){
