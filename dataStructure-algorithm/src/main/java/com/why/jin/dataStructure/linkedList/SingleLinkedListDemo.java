@@ -2,7 +2,7 @@ package com.why.jin.dataStructure.linkedList;
 
 /**
  * @author Jin
- * dateTime 2021-04-29-15:39
+ * dateTime 2021-04-29-15:40
  */
 public class SingleLinkedListDemo {
 
