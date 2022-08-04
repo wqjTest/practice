@@ -3,7 +3,7 @@ package com.why.jin.juc;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-class MyThread implements Runnable{
+class MyThread implements Runnable {
 
     @Override
     public void run() {
@@ -11,7 +11,7 @@ class MyThread implements Runnable{
     }
 }
 
-class MyThread2 implements java.util.concurrent.Callable<Integer>{
+class MyThread2 implements java.util.concurrent.Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
@@ -27,7 +27,7 @@ class MyThread2 implements java.util.concurrent.Callable<Integer>{
 public class Callable {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         FutureTask<Integer> futureTask = new FutureTask<>(new MyThread2());
-        new Thread(futureTask,"A").start();
+        new Thread(futureTask, "A").start();
         Integer result = futureTask.get();
         System.out.println(result);
     }
