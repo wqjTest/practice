@@ -1,5 +1,7 @@
 package com.why.jin.juc.completableFuture;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -26,6 +28,21 @@ public class CompletableFutureDemo {
         t1.start();
 
         System.out.println(futureTask.get());
+
+        value(65536);
+    }
+
+    public static List<Integer> value (long value) {
+        List<Integer> result = new ArrayList<>();
+        int index = 1;
+        while ((int) Math.pow(2, index) <= value) {
+            int c_value = (int) Math.pow(2, index);
+            if ((value & c_value) == c_value) {
+                result.add(c_value);
+            }
+            index += 1;
+        }
+        return result;
     }
 }
 

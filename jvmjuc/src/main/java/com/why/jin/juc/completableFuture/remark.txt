@@ -27,9 +27,25 @@
          2、isDone() 轮询 :消耗无畏的CPU资源，而且也不见的能及时的得到计算结果，如果想要异步获取结果，通常都会以轮询的方式获取结果尽量不要阻塞
    4、想完成一下复杂的任务
       对于简单的业务场景使用Future完全OK
-　　　　创建异步任务：Ｆｕｔｕｒｅ　＋　线程池配合
-　　　　Ｆｕｔｕｒｅ　能干的，Ｃｏｍｐｌａｔｅ
+　　　　创建异步任务：Future　＋　线程池配合
+      当Future集合中某个任务最快结束时，返回结果，返回第一名处理结果
+      使用Future之前提供的那点API就囊中羞涩，处理起来不够优化，这时候还是让CompletableFuture以声明式的方式优雅的处理这些需求
+　　　　Future能干的，CompletableFuture都能干
 三、CompletableFuture对Future的改进
+   1、CompletableFuture为什么出现
+   2、CompletableFuture和CompletionStage源码分别介绍
+   3、核心的四个静态方法，来创建一个异步任务
+      (1) runAsync 无返回值
+          public static CompletableFuture<Void> runAsync(Runnable runnable)
+          public static CompletableFuture<Void> runAsync(Runnable runnable,Executor executor)
+      (2) supplyAsync 有返回值
+          public static<U> CompletableFuture<U> runAsync(Supplier<U> supplier)
+          public static<U> CompletableFuture<U> runAsync(Supplier<U> supplier,Executor executor)
+      (3) 上述Executor executor参数说明
+          没有指定Executor的方法，直接使用默认的ForkJoinPool.commonPool()作为它的线程池执行异步代码
+          如果指定线程池，则使用我们自定义的或者特别指定的线程池执行异步代码
+      (4) Code
+      (5)
 
 四、案列精讲-从电商网站的比价需求说开去
 
