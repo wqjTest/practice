@@ -36,6 +36,30 @@ public class SingleLinkedListDemo {
         singleLinkedList.list();
         //显示一把
 //        singleLinkedList.list();
+
+        //测试一下 求单链表中有效节点个数
+        System.out.println("有效的节点个数="+getLength(singleLinkedList.getHead()));
+    }
+
+    //1、方法：获取到单链表的节点的个数（如果是带头节点的链表，需求不统计头节点）
+
+    /**
+     *
+     * @param head 链表头节点
+     * @return 返回的就是有效节点的个数
+     */
+    public static int getLength(HeroNode head) {
+        if (head.next == null) { //空链表
+            return 0;
+        }
+        int length = 0;
+        //定义一个辅助的变量,这里我们没有统计头节点
+        HeroNode cur = head.next;
+        while (cur != null) {
+            length ++;
+            cur = cur.next; //遍历
+        }
+        return length;
     }
 
 }
@@ -44,6 +68,11 @@ public class SingleLinkedListDemo {
 class SingleLinkedList {
     //先初始化一个头结点，头结点不要动
     private HeroNode head = new HeroNode(0, "", "");
+
+    //返回头节点
+    public HeroNode getHead() {
+         return head;
+    }
 
     //添加节点到单向链表
     //思路，当无考虑编号顺序是
