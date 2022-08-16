@@ -71,7 +71,7 @@ public class SingleLinkedListDemo {
      * 5.如果找到了，则返回该节点，否则返回null
      */
     public static HeroNode findLastIndexNode(HeroNode head,int index) {
-
+       return null;
     }
 
 }
