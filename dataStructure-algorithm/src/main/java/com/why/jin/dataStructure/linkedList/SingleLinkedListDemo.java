@@ -41,10 +41,9 @@ public class SingleLinkedListDemo {
         System.out.println("有效的节点个数="+getLength(singleLinkedList.getHead()));
     }
 
-    //1、方法：获取到单链表的节点的个数（如果是带头节点的链表，需求不统计头节点）
 
     /**
-     *
+     * 1、方法：获取到单链表的节点的个数（如果是带头节点的链表，需求不统计头节点）
      * @param head 链表头节点
      * @return 返回的就是有效节点的个数
      */
@@ -60,6 +59,19 @@ public class SingleLinkedListDemo {
             cur = cur.next; //遍历
         }
         return length;
+    }
+
+    /**
+     * 2、查找单链表中的倒数第K个节点【新浪面试题】
+     * 思路：
+     * 1.编写一个方法，接收head节点，同时接收一个index
+     * 2.index 表示是倒数第index节点
+     * 3.先把链表从头到尾遍历,得到链表的总的长度
+     * 4.得到size后，我们从链表的第一个开始遍历（size-index）个，就可以得到
+     * 5.如果找到了，则返回该节点，否则返回null
+     */
+    public static HeroNode findLastIndexNode(HeroNode head,int index) {
+
     }
 
 }
