@@ -13,11 +13,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
-      <module name="dataStructure-algorithm" target="1.5" />
-      <module name="interview" target="1.5" />
-      <module name="jvmjuc" target="1.8" />
-      <module name="practice" target="1.5" />
-      <module name="tools" target="1.8" />
+      <module name="dataStructure-algorithm" target="8" />
+      <module name="interview" target="8" />
+      <module name="jvmjuc" target="8" />
+      <module name="practice" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

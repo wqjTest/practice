@@ -1,5 +1,7 @@
 package com.why.jin.dataStructure.linkedList;
 
+import java.util.Stack;
+
 /**
  * @author Jin
  * dateTime 2021-04-29-15:40
@@ -39,6 +41,22 @@ public class SingleLinkedListDemo {
 
         //测试一下 求单链表中有效节点个数
         System.out.println("有效的节点个数="+getLength(singleLinkedList.getHead()));
+
+        //测试一下看看是否得到了倒数第K个节点
+        HeroNode res = findLastIndexNode(singleLinkedList.getHead(),1);
+        System.out.println("res="+res);
+
+        //测试一下单链表的反转功能
+        System.out.println("原来链表的情况~~");
+        singleLinkedList.list();
+
+        System.out.println("反转单链表~~");
+        reverseList(singleLinkedList.getHead());
+        singleLinkedList.list();
+
+        //测试逆序打印
+        System.out.println("逆序打印单链表~~");
+        reversePrint(singleLinkedList.getHead());
     }
 
 
@@ -71,7 +89,77 @@ public class SingleLinkedListDemo {
      * 5.如果找到了，则返回该节点，否则返回null
      */
     public static HeroNode findLastIndexNode(HeroNode head,int index) {
-       return null;
+        //判断如果链表为空，返回null
+        if(head.next == null) {
+            return null; //没有找到
+        }
+        //第一个遍历得到链表的长度（节点个数）
+        int size = getLength(head);
+        //第二次遍历 size-index 位置，就是我们倒数的第K个节点
+        //先做一个index的校验
+        if (index <=0 || index > size) {
+            return null;
+        }
+        //定义给辅助变量，for 循环定位到倒数的index
+        HeroNode cur = head.next; //3 //3 - 1 =2
+        for (int i=0;i<size - index;i++) {
+            cur = cur.next;
+        }
+        return cur;
+    }
+
+    /**
+     * 3、将单链表进行反转
+     *
+     * 思路：
+     * 1、先定义一个节点reverseHead = new HeroNode();
+     * 2、从头到尾遍历原来的链表，每遍历一个节点，就将其取出，并放在新的链表的最前端
+     * 3、原来的链表的head.next = reverseHead.next
+     */
+    public static void reverseList(HeroNode head) {
+        //如果当前链表为空，或者只有一个节点，无需反转，直接返回
+        if(head.next == null || head.next.next == null) {
+            return;
+        }
+
+        //定义一个辅助的指针（变量），帮助我们遍历原来的链表
+        HeroNode cur = head.next;
+        HeroNode next = null;//指向当前节点[cur]的下一个节点
+        HeroNode reverseHead = new HeroNode(0,"","");
+        //遍历原来的链表，每遍历一个节点，就将其取出，并放在新的链表reverseHead的最前端
+        while (cur != null) {
+            next = cur.next;//先暂时保存当前节点的下一个节点，因为后面需要使用
+            cur.next = reverseHead.next; //将cur的下一个节点指向新的链表的最前端
+            reverseHead.next = cur;//将cur 连接到新的链表上
+            cur = next;//让cur后移
+        }
+        // 将head.next 指向reverseHead.next，实现单链表的反转
+        head.next = reverseHead.next;
+    }
+
+    /**
+     * 4、逆序打印
+     * 思路：
+     * 1、上面的题的要求就是逆序打印单链表
+     * 2、方式一：先将单链表进行反转操作，然后在遍历即可，这样做的问题是会破坏原来的单链表的结构，不建议
+     * 3、方式二：可以利用栈这个数据结构，将各个节点压入栈中，然后利用栈的先进后出的特点，就实现了逆序打印的效果
+     */
+    public static void reversePrint(HeroNode head) {
+        if (head.next == null) {
+            return; //空链表，不能打印
+        }
+        //创建要给一个栈，将各个节点压入栈
+        Stack<HeroNode> stack = new Stack<>();
+        HeroNode cur = head.next;
+        //空链表的所有节点压入栈
+        while (cur != null) {
+            stack.push(cur);
+            cur = cur.next; //cur后移，这样就可以压入下一个节点
+        }
+        //将栈中的节点进行打印，pop出栈
+        while (stack.size() > 0) {
+            System.out.println(stack.pop()); //stack的特点是先进后出
+        }
     }
 
 }
