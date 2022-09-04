@@ -50,7 +50,15 @@ public class DoubleLinkedListDemo {
         doubleLinkedList.list();
 
         //修改测试
+        HeroNode2 newHeroNode = new HeroNode2(4,"公孙胜","入云龙");
+        doubleLinkedList.update(newHeroNode);
+        System.out.println("修改后的链表情况~~");
+        doubleLinkedList.list();
 
+        //删除
+        doubleLinkedList.del(3);
+        System.out.println("删除后的链表情况~~");
+        doubleLinkedList.list();
     }
 }
 
