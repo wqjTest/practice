@@ -25,6 +25,13 @@ package com.why.jin.dataStructure.linkedList;
  */
 public class Josepfu {
 
+    public static void main(String[] args) {
+        //测试一把看看构建环形链表，和遍历是否OK
+        CircleSingleLinkedList circleSingleLinkedList = new CircleSingleLinkedList();
+        circleSingleLinkedList.addBoy(5);//加入五个小孩节点
+        circleSingleLinkedList.showBoy();
+
+    }
 }
 
 class CircleSingleLinkedList {
@@ -41,7 +48,7 @@ class CircleSingleLinkedList {
         //使用for来创建我们的环形链表
         for (int i=1;i<=nums;i++) {
             //根据编号，创建小孩节点
-            Boy boy = new Boy();
+            Boy boy = new Boy(i);
             //如果是第一个小孩
             if ( i==1) {
                 first = boy;
@@ -65,9 +72,16 @@ class CircleSingleLinkedList {
         //因为first不能动，因此我们任然使用一个辅助指针完成遍历
         Boy curBoy = first;
         while (true) {
-            System.out.println();
-        }
+            System.out.printf("小孩的编号%d \n",curBoy.getNo());
+            if(curBoy.getNext() == first) {
+                break;
+            }
+            curBoy = curBoy.getNext(); //curBoy后移
+         }
     }
+
+    //根据用户的输入，计算小孩出圈的顺序
+
 }
 
 class Boy {
@@ -94,3 +108,14 @@ class Boy {
         this.next = next;
     }
 }
+
+/**
+ * 根据用户输入，生成一个小孩出圈的顺序
+ * n = 5,即有5个人
+ * k = 1,从第一个开始报数
+ * m = 2,数两下
+ *
+ * 1、需求创建一个辅助指针（变量）helper,事先应该指向环形链表的最后这个节点
+ * 2、当小孩报数时，让first和helper指针同时移动m-1次
+ * 3、这时就可以将first指向的小孩节点出圈first = first.next  helper。next = first 原来first指向的节点就没有任何引用，就会被回收
+ */
