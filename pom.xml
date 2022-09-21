@@ -12,7 +12,7 @@
     <module>dataStructure-algorithm</module>
       <module>interview</module>
       <module>jvmjuc</module>
-      <module>tools</module>
+    <module>tools</module>
   </modules>
   <name>practice</name>
 
